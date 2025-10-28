@@ -120,68 +120,84 @@ function Payout() {
   const user_profile = profile?.data?.result?.[0] || [];
 
   return (
-    <div className="min-h-screen bg-gray-200 py-1 px-4">
+    <div className=" flex items-center justify-center  px-2">
       <Loader isLoading={loding} />
-      <p className="text-xl text-blue-900 font-bold py-2 text-center">Payout </p>
-      <div className="max-w-md mx-auto bg-white rounded shadow-lg p-6">
-        {/* Balance Info */}
-        <div className="bg-blue-50 p-4 mb-5 rounded border border-blue-300">
-          <div className="text-blue-600 text-sm font-semibold mb-1">
-            Current Balance
+
+      <div className="w-full max-w-md bg-white/80 shadow-xl rounded-xl p-6 border border-white ">
+        <h1 className="text-2xl font-extrabold text-center text-blue-800 mb-6">
+          💸 Payout
+        </h1>
+
+        {/* ====== Redesigned Balance Card ====== */}
+        <div className="relative">
+          <div className="bg-white border border-blue-200 rounded-xl shadow-md p-2 flex flex-col items-center justify-center text-center">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-blue-400 to-blue-700 flex items-center justify-center text-white text-xl font-bold shadow-md mb-1">
+              💰
+            </div>
+            <p className="text-gray-600 text-sm font-semibold">Current Balance</p>
+            <p className="text-4xl font-extrabold text-blue-800 mt-1">
+              {user_profile?.jnr_curr_wallet ?? 0}
+              <span className="text-lg font-semibold text-blue-500 ml-1">USD</span>
+            </p>
           </div>
-          <div className="text-blue-800 text-2xl font-bold">
-            {user_profile?.jnr_curr_wallet ?? 0} USD
-          </div>
+
+          {/* Decorative gradient ring */}
+          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-blue-200 to-indigo-200 blur-2xl rounded-2xl opacity-40"></div>
         </div>
 
-        {/* Wallet Address Display */}
-        <div className="mb-5 text-sm bg-gray-100 text-gray-800 p-4 rounded border border-gray-300 break-words">
-          <div className="font-medium text-blue-600 mb-1">Address:</div>
-          <div className="font-semibold text-sm">
+        {/* ====== Wallet Address Display ====== */}
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4  mt-4">
+          <p className="text-gray-600 text-sm font-semibold mb-1">Wallet Address:</p>
+          <p className="text-green-600 font-bold break-all text-sm">
             {fk.values.walletAddress || "Not available"}
+          </p>
+        </div>
+
+        {/* ====== Amount Input ====== */}
+        <div className="mb-5 mt-3">
+          <label htmlFor="amount" className="block text-gray-700 font-semibold mb-2">
+            Enter Amount
+          </label>
+          <div className="relative">
+            <input
+              type="number"
+              id="amount"
+              name="amount"
+              placeholder="e.g. 50"
+              value={fk.values.amount}
+              onChange={fk.handleChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900 transition-all"
+            />
+            <span className="absolute right-3 top-3 text-gray-500 font-semibold">USD</span>
           </div>
         </div>
 
-        {/* Amount Input */}
-        <div className="mb-5">
-          <label htmlFor="amount" className="block text-gray-700 font-semibold mb-2">
-            Amount
-          </label>
-          <input
-            type="number"
-            id="amount"
-            name="amount"
-            placeholder="Enter Amount"
-            value={fk.values.amount}
-            onChange={fk.handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-900"
-          />
-        </div>
+        {/* ====== Wallet Address (read-only) ====== */}
+        {/* <div className="mb-6">
+      <label htmlFor="walletAddress" className="block text-gray-700 font-semibold mb-2">
+        Confirm Wallet Address (BEP20)
+      </label>
+      <input
+        id="walletAddress"
+        name="walletAddress"
+        readOnly
+        placeholder="0x..."
+        value={fk.values.walletAddress}
+        className="w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg text-gray-700 cursor-not-allowed"
+      />
+    </div> */}
 
-        {/* Wallet Address Input (read-only) */}
-        <div className="mb-6">
-          <label htmlFor="walletAddress" className="block text-gray-700 font-semibold mb-2">
-            Confirm Wallet Address (BEP20)
-          </label>
-          <input
-            id="walletAddress"
-            name="walletAddress"
-            readOnly
-            placeholder="0x..."
-            value={fk.values.walletAddress}
-            className="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md text-gray-700 cursor-not-allowed"
-          />
-        </div>
-
-        {/* Confirm Button */}
+        {/* ====== Confirm Button ====== */}
         <button
           onClick={Payout}
-          className="w-full py-3 rounded-md bg-gradient-to-r from-blue-300 to-blue-900 hover:from-blue-600 hover:to-blue-700 text-white font-semibold transition"
+          className="w-full py-3 rounded-lg bg-gradient-to-r from-blue-500 to-blue-800 hover:from-blue-600 hover:to-blue-900 text-white font-semibold shadow-md transition-all transform hover:scale-[1.02]"
         >
-          Confirm
+          Confirm Payout
         </button>
       </div>
     </div>
+
+
   );
 }
 

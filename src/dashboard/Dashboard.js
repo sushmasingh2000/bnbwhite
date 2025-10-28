@@ -220,7 +220,7 @@ const Dashboard = () => {
           {statCards.map((card, i) => (
             <div
               key={i}
-              className="bg-gold-color text-black py-8 px-4 border border-gray-300 shadow-xs gap-2 flex items-center justify-between cursor-pointer"
+              className="bg-gold-color text-black py-8 px-4 border rounded-xl border-gray-300 shadow-xs gap-2 flex items-center justify-between cursor-pointer"
               onClick={() => navigate(card?.path)}
             >
               <div className="flex gap-1 items-center">
