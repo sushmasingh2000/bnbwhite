@@ -60,65 +60,68 @@ const Activation = () => {
     ];
   });
   return (
-    <div className="rounded-lg shadow-lg p-3 border border-black/10 mb-6 bg-gray-200">
+    <div className="rounded-lg shadow-lg p-3 border border-black/10 mb-6 ">
       <h2 className="text-xl font-semibold mb-4">Activation Report</h2>
-
-      <div className="flex flex-col sm:flex-wrap md:flex-row items-center gap-3 sm:gap-4 w-full text-sm sm:text-base">
-          <div className="relative w-full sm:w-auto">
-          {fk.values.start_date ? "" :
-              <label
-              htmlFor="start_date"
-              className="absolute left-3 top-2 text-white text-sm"
-            >
-              Start Date
-            </label>
-            }
+       <div className="flex flex-col sm:flex-row gap-2 w-full max-w-md mx-auto p-2">
+          {/* Start Date */}
+          <div className="relative w-full sm:w-1/2">
             <input
               type="date"
               name="start_date"
               id="start_date"
               value={fk.values.start_date}
               onChange={fk.handleChange}
-              className="bg-black border border-white/20 rounded-md py-2 px-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 w-full sm:w-auto text-sm"
+              className="w-full border-b border-gray-300 py-2 text-gray-900 placeholder-transparent focus:border-blue-500 focus:outline-none"
+              placeholder="Start Date"
             />
-          </div>
-          <div className="relative w-full sm:w-auto">
-          {fk.values.end_date ? "" :
-              <label
-              htmlFor="end_date"
-              className="absolute left-3 top-2 text-white text-sm"
+            <label
+              htmlFor="start_date"
+              className="absolute left-0 -top-2.5 text-gray-600 font-bold text-xs transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-gray-300 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:text-blue-500 peer-focus:text-xs"
             >
-              End Date
+              Start Date
             </label>
-            }
+          </div>
+
+          {/* End Date */}
+          <div className="relative w-full sm:w-1/2 mt-1">
             <input
               type="date"
               name="end_date"
               id="end_date"
               value={fk.values.end_date}
               onChange={fk.handleChange}
-              className="bg-black border border-white/20 rounded-md py-2 px-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/40 w-full sm:w-auto text-sm"
+              className="w-full border-b border-gray-300 py-2 text-gray-900 placeholder-transparent focus:border-blue-500 focus:outline-none"
+              placeholder="End Date"
             />
+            <label
+              htmlFor="end_date"
+              className="absolute left-0 -top-2.5 text-gray-600 font-bold text-xs transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-gray-300 peer-placeholder-shown:text-sm peer-focus:-top-2.5 peer-focus:text-blue-500 peer-focus:text-xs"
+            >
+              End Date
+            </label>
           </div>
-          <button
-            onClick={() => {
-              setPage(1);
-              client.invalidateQueries(["get_roi"]);
-            }}
-            type="submit"
-            className="bg-white text-blue-900 font-bold py-2 px-4 rounded-full hover:bg-gray-300 transition-colors w-full sm:w-auto text-sm"
-          >
-            Search
-          </button>
-          <button
-            onClick={() => {
-              fk.handleReset();
-              setPage(1);
-            }}
-            className="bg-transparent border border-white text-black font-bold py-2 px-4 rounded-full hover:bg-white hover:text-black transition-colors w-full sm:w-auto text-sm"
-          >
-            Clear
-          </button>
+
+          {/* Buttons */}
+          <div className="flex gap-2 w-full mt-2 sm:mt-0 sm:w-auto">
+            <button
+              onClick={() => {
+                setPage(1);
+                client.invalidateQueries(["get_actiavtion"]);
+              }}
+              className="flex-1 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors text-sm"
+            >
+              Search
+            </button>
+            <button
+              onClick={() => {
+                fk.handleReset();
+                setPage(1);
+              }}
+              className="flex-1 bg-gray-200 text-gray-800 py-2 rounded-md hover:bg-gray-300 transition-colors text-sm"
+            >
+              Clear
+            </button>
+          </div>
         </div>
 
       {/* Main Table Section */}
